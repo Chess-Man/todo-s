@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>simple CRUD using Laravel 8</title>
+    <title>Todo's</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=BhuTuka+Expanded+One&family=Roboto:wght@100&display=swap" rel="stylesheet">
@@ -158,6 +158,22 @@
         .button-25:disabled:hover {
         box-shadow: none;
         }
+        .alert{
+            width: calc(100% - 40px); 
+            height: 50px; 
+            background-color: #27AE62;
+            border-radius: 4px;
+            margin:10px 20px 0 20px;
+        }
+        .success-message{
+            color: #FFFFFF;
+            height: 100%;
+            letter-spacing: 3px;
+            font-size: 120%;
+            font-weight: bold; 
+            text-align: center;
+            padding: 10px;
+        }
         
 
     </style>
@@ -169,41 +185,55 @@
             <h1>My Daily Activities!</h1>
         </div>
 
+        @if(session()->has('message'))
+            <div class="alert">
+                    <div class="success-message">
+                        {{ session()->get('message') }}
+                    </div>
+            
+            </div>
+        @endif
+
         <div class="grid">
 
             <div class="card-body">
-
+               
                 <div class="card-title">
                     <h1>Add the things you want to do!</h1>
                 </div>
 
                 <div class="form">
-                    <form action="">
+                    <form action="" action="{{ route('todo.store') }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="exampleEmail" class="">Title</label>
-                            <input name="email" id="exampleEmail" placeholder="Todo" type="text" class="form-control">
+                            <input name="title" id="exampleEmail" placeholder="Todo" type="text" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleEmail" class="">Description</label>
-                            <input name="email" id="exampleEmail" placeholder="Todo" type="text" class="form-control">
+                            <input name="description" id="exampleEmail" placeholder="Description" type="text" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleEmail" class="">Date</label>
-                            <input name="email" id="exampleEmail" placeholder="Todo" type="date" class="form-control">
+                            <label for="exampleEmail" class="">Start Date</label>
+                            <input name="start_date" id="exampleEmail" placeholder="Todo" type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleEmail" class="">End Date</label>
+                            <input name="end_date" id="exampleEmail" placeholder="Todo" type="date" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleEmail" class="">Start Time</label>
-                            <input name="email" id="exampleEmail" placeholder="Start Time" type="time" class="form-control">
+                            <input name="start_time" id="exampleEmail" placeholder="Start Time" type="time" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleEmail" class="">End Time</label>
-                            <input name="email" id="exampleEmail" placeholder="End Time" type="time" class="form-control">
+                            <input name="end_time" id="exampleEmail" placeholder="End Time" type="time" class="form-control">
                         </div>
-
 
                         <div class="btn">
                             <button type="submit" class="button-25"> Submit </button>
